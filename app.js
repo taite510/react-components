@@ -27,7 +27,8 @@ class TodoListItem extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      done: false
+      done: false,
+      bold: false
     };
   }
 
@@ -37,12 +38,19 @@ class TodoListItem extends React.Component {
     });
   }
 
+  onListItemHover(event) {
+    this.setState({
+      bold: !this.state.bold
+    });
+  }
+
   render() {
     let style = {
-      textDecoration: this.state.done ? 'line-through' : 'none'
+      textDecoration: this.state.done ? 'line-through' : 'none',
+      fontWeight: this.state.bold ? 'bold' : 'normal'
     };
     return (
-      <li style={style} onClick={this.onListItemClick.bind(this)}>{this.props.item}</li>
+      <li style={style} onClick={this.onListItemClick.bind(this)} onMouseEnter={this.onListItemHover.bind(this)} onMouseLeave={this.onListItemHover.bind(this)}>{this.props.item}</li>
     );
   }
 }
